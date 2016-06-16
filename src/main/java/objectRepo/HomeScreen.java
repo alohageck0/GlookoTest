@@ -18,12 +18,14 @@ public class HomeScreen extends ScreenTemplate {
    @FindBy(id = "com.glooko.logbook:id/get_started_title")
    WebElement get_started_title;
 
-//   By getStarted
+//   By getStarted = new By.ById("get_started");
+
    public WebElement getMenuButton() {
       return menuButton;
    }
 
-   public WebElement getGet_started_title() {
+   public WebElement getGetStartedTitle() {
       return get_started_title;
    }
+
 }
