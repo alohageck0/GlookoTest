@@ -7,10 +7,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.DataProvider;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public class MyDataProviders {
+   private static File appDir = new File("src");
+   private static File testData = new File(appDir, "usernames.xlsx");
 
    private static XSSFWorkbook workbook = null;
    private static XSSFSheet sheet = null;
@@ -23,7 +26,7 @@ public class MyDataProviders {
    }
 
    private static Object[][] getData(String sheetName) throws IOException {
-      FileInputStream file = new FileInputStream("/Users/royalfiish/IdeaProjects/GlookoTest/src/usernames.xlsx");
+      FileInputStream file = new FileInputStream(testData.getAbsolutePath());
       workbook = new XSSFWorkbook(file);
       sheet = workbook.getSheet(sheetName);
       int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum() + 1;

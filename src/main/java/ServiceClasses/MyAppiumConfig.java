@@ -6,9 +6,12 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.net.MalformedURLException;
 
 public final class MyAppiumConfig {
+   private File appDir = new File("src");
+   private File app = new File(appDir, "BookMyShow.apk");
    private ServerArguments serverArguments = new ServerArguments();
    private AppiumServer appiumServer;
    private DesiredCapabilities capabilities = new DesiredCapabilities();
