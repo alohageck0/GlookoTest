@@ -67,8 +67,10 @@ public class RemindersTests extends TestTemplate {
       ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
       minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
 
+      scheduleTimeScreen.printCenter();
+      System.out.println(scheduleTimeScreen.getZero().getLocation());
       //todo create method to find x and y of each minute and hour
 
-      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
+//      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
    }
 }

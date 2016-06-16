@@ -9,10 +9,16 @@ import java.util.List;
 
 public class ScheduleTimeScreen extends ScreenTemplate {
    private List<WebElement> elements;
+   int centerX;
+   int centerY;
+   int radius;
+
 
    public ScheduleTimeScreen(AndroidDriver driver) {
       super(driver);
-//      elements = driver.findElementsByAndroidUIAutomator("new UiSelector().class(\"android.widget.RadialTimePickerView$RadialPickerTouchHelper\")");
+      centerX = findCenterX();
+      centerY = findCenterY();
+      elements = driver.findElementsByClassName("android.widget.RadialTimePickerView.RadialPickerTouchHelper");
    }
 
    @FindBy(id = "android:id/minutes")
@@ -26,6 +32,8 @@ public class ScheduleTimeScreen extends ScreenTemplate {
 
    @FindBy(id = "android:id/hours")
    MobileElement hoursSelector;
+
+
 
    public MobileElement getHoursSelector() {
       return hoursSelector;
@@ -45,5 +53,26 @@ public class ScheduleTimeScreen extends ScreenTemplate {
 
    public WebElement getOkButton() {
       return okButton;
+   }
+   public WebElement getZero(){
+      return elements.get(0);
+   }
+
+   public void printCenter() {
+      System.out.println(centerX + "  " + centerY);
+   }
+
+   private int findCenterX() {
+      centerX = getRadialPicker().getLocation().getX() + (getRadialPicker().getSize().getHeight() / 2);
+      return centerX;
+   }
+
+   private int findCenterY() {
+      centerY = getRadialPicker().getLocation().getY() + (getRadialPicker().getSize().getWidth() / 2);
+      return centerY;
+   }
+
+   public int getXHours() {
+      return 1;
    }
 }
