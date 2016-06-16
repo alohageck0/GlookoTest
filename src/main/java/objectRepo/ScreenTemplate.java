@@ -12,4 +12,8 @@ public abstract class ScreenTemplate {
       PageFactory.initElements(new AppiumFieldDecorator(driver), this);
    }
 
+
+   public AndroidDriver getDriver() {
+      return driver;
+   }
 }

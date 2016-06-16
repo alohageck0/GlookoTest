@@ -11,66 +11,72 @@ import org.testng.annotations.Test;
 import serviceClasses.TestTemplate;
 
 public class RemindersTests extends TestTemplate {
-   public RemindersTests(AndroidDriver driver) {
-      super(driver);
-   }
+    public RemindersTests(AndroidDriver driver) {
+        super(driver);
+    }
 
-   public RemindersTests() {
-   }
+    public RemindersTests() {
+    }
 
-   @AfterClass
-   public void tearDown() {
-      logger.info("Started logout");
-      LoginTests loginTests = new LoginTests(driver);
-      loginTests.logout();
-   }
+    //   @AfterClass
+    public void tearDown() {
+        logger.info("Started logout");
+        LoginTests loginTests = new LoginTests(driver);
+        loginTests.logout();
+    }
 
-   @Test(dataProvider = "loginUsers", dataProviderClass = MyDataProviders.class)
-   public void addInsulinReminderTest(String username, String password) {
-      TouchAction touchAction = new TouchAction(driver);
-      LoginTests loginTests = new LoginTests(driver);
-      RemindersScreen remindersScreen = new RemindersScreen(driver);
-      SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
-      ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
-      int minutes;
+    @Test(dataProvider = "loginUsers", dataProviderClass = MyDataProviders.class)
+    public void addInsulinReminderTest(String username, String password) {
+        TouchAction touchAction = new TouchAction(driver);
+        LoginTests loginTests = new LoginTests(driver);
+        RemindersScreen remindersScreen = new RemindersScreen(driver);
+        SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
+        ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
+        int minutes;
 
 
-      loginTests.login(username, password);
-      logger.info("Logged in succesfully");
-      getMenu(driver);
-      MenuScreen menuScreen = new MenuScreen(driver);
-      touchAction.tap(menuScreen.getReminders()).perform();
-      touchAction.tap(remindersScreen.getAddReminderButton()).perform();
-      touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
-      minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
-      touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
-      scheduleTimeScreen.getMinutesSelector().sendKeys(Integer.toString(minutes + 1));
-      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
-   }
+        loginTests.login(username, password);
+        logger.info("Logged in succesfully");
+        getMenu(driver);
+        MenuScreen menuScreen = new MenuScreen(driver);
+        touchAction.tap(menuScreen.getReminders()).perform();
+        touchAction.tap(remindersScreen.getAddReminderButton()).perform();
+        touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
+        minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
+        touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
+        scheduleTimeScreen.getMinutesSelector().sendKeys(Integer.toString(minutes + 1));
+        touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
+    }
 
-   @Test
-   public void test() {
-      TouchAction touchAction = new TouchAction(driver);
-      LoginTests loginTests = new LoginTests(driver);
-      RemindersScreen remindersScreen = new RemindersScreen(driver);
-      SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
-      int minutes;
+    @Test
+    public void test() {
+        TouchAction touchAction = new TouchAction(driver);
+        LoginTests loginTests = new LoginTests(driver);
+        RemindersScreen remindersScreen = new RemindersScreen(driver);
+        SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
+        int minutes;
 
 
 //      loginTests.login(username, password);
 //      logger.info("Logged in succesfully");
-      getMenu(driver);
-      MenuScreen menuScreen = new MenuScreen(driver);
-      touchAction.tap(menuScreen.getReminders()).perform();
-      touchAction.tap(remindersScreen.getAddReminderButton()).perform();
-      touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
-      ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
-      minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
+        getMenu(driver);
+        MenuScreen menuScreen = new MenuScreen(driver);
+        touchAction.tap(menuScreen.getReminders()).perform();
+        touchAction.tap(remindersScreen.getAddReminderButton()).perform();
+        touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
+        ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
+        minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
 
-      scheduleTimeScreen.printCenter();
-      System.out.println(scheduleTimeScreen.getZero().getLocation());
-      //todo create method to find x and y of each minute and hour
+        scheduleTimeScreen.printCenter();
+        System.out.println(scheduleTimeScreen.getThree().getLocation());
+        System.out.println(scheduleTimeScreen.getRadius());
+//        System.out.println(scheduleTimeScreen.getZero().getLocation());
+
+
+        scheduleTimeScreen.printCoords(scheduleTimeScreen.getMinutesPoint(45));
+        //todo create method to find x and y of each minute and hour
+
 
 //      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
-   }
+    }
 }
