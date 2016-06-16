@@ -54,7 +54,6 @@ public class RemindersTests extends TestTemplate {
       LoginTests loginTests = new LoginTests(driver);
       RemindersScreen remindersScreen = new RemindersScreen(driver);
       SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
-      ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
       int minutes;
 
 
@@ -65,13 +64,10 @@ public class RemindersTests extends TestTemplate {
       touchAction.tap(menuScreen.getReminders()).perform();
       touchAction.tap(remindersScreen.getAddReminderButton()).perform();
       touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
+      ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
       minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
-      touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
-      scheduleTimeScreen.getRadialPicker().sendKeys("33");
-//      touchAction.tap(scheduleTimeScreen.setMinutes());
-      scheduleTimeScreen.getRadialPicker();
 
-//      scheduleTimeScreen.getMinutesSelector().sendKeys("44");
+      //todo create method to find x and y of each minute and hour
 
       touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
    }

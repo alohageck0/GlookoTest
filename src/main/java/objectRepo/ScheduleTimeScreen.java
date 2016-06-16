@@ -1,7 +1,7 @@
 package objectRepo;
 
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -9,15 +9,14 @@ import java.util.List;
 
 public class ScheduleTimeScreen extends ScreenTemplate {
    private List<WebElement> elements;
-   private AndroidDriver driver;
 
    public ScheduleTimeScreen(AndroidDriver driver) {
       super(driver);
-      this.driver = driver;
+//      elements = driver.findElementsByAndroidUIAutomator("new UiSelector().class(\"android.widget.RadialTimePickerView$RadialPickerTouchHelper\")");
    }
 
    @FindBy(id = "android:id/minutes")
-   WebElement minutesSelector;
+   MobileElement minutesSelector;
 
    @FindBy(id = "android:id/button1")
    WebElement okButton;
@@ -25,19 +24,22 @@ public class ScheduleTimeScreen extends ScreenTemplate {
    @FindBy(id = "android:id/radial_picker")
    WebElement radialPicker;
 
+   @FindBy(id = "android:id/hours")
+   MobileElement hoursSelector;
+
+   public MobileElement getHoursSelector() {
+      return hoursSelector;
+   }
+
    public WebElement getRadialPicker() {
       return radialPicker;
    }
 
-   public WebElement setMinutes(int minutes) {
-      return driver.findElementByAndroidUIAutomator("new UiSelector().content-desc(\"30\")");
+   public WebElement setMinutes(int minutesNow) {
+      return elements.get(minutesNow % 5);
    }
 
-   public WebElement setMinutes() {
-      return driver.findElement(By.xpath("//*[@content-desc='30']"));
-   }
-
-   public WebElement getMinutesSelector() {
+   public MobileElement getMinutesSelector() {
       return minutesSelector;
    }
 
