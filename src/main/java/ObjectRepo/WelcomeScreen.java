@@ -14,12 +14,23 @@ public class WelcomeScreen extends ScreenTemplate {
    @FindBy(id = "com.glooko.logbook:id/login")
    WebElement loginButton;
 
+   @FindBy(id = "com.glooko.logbook:id/glooko_logo")
+   WebElement logo;
+
 
    public WebElement getSignUpButton() {
       return signUpButton;
    }
 
+   public WebElement getLogo() {
+      return logo;
+   }
+
    public WebElement getLoginButton() {
       return loginButton;
    }
+
+//   public boolean ifLogoPresent(){
+//
+//   }
 }

@@ -18,13 +18,22 @@ public final class MyAppiumConfig {
 
 
    public void setServerArguments() throws MalformedURLException {
+      setBasicServerArguments();
+      capabilities.setCapability("appActivity", "com.glooko.logbook.activity.FtueActivity");
+   }
+
+   public void setServerArguments(String activity) {
+      setBasicServerArguments();
+      capabilities.setCapability("appActivity", activity);
+   }
+
+   private void setBasicServerArguments() {
       serverArguments.setArgument("--address", "127.0.0.1");
       serverArguments.setArgument("--local-timezone", true);
       serverArguments.setArgument("--device-ready-timeout", "100");
       capabilities.setCapability(MobileCapabilityType.PLATFORM, Platform.ANDROID);
       capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Panel");
       capabilities.setCapability("appPackage", "com.glooko.logbook");
-      capabilities.setCapability("appActivity", "com.glooko.logbook.activity.FtueActivity");
       capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 15);
    }
 

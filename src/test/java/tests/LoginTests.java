@@ -23,6 +23,7 @@ public class LoginTests extends TestTemplate {
       WelcomeScreen welcomeScreen = new WelcomeScreen(driver);
       LoginScreen loginScreen = new LoginScreen(driver);
       HomeScreen homeScreen = new HomeScreen(driver);
+
       touchAction.tap(welcomeScreen.getLoginButton()).perform();
       touchAction.tap(loginScreen.getUsername_field_login()).perform();
       loginScreen.getUsername_field_login().sendKeys(username);
@@ -44,7 +45,6 @@ public class LoginTests extends TestTemplate {
       WelcomeScreen welcomeScreen = new WelcomeScreen(driver);
       WebDriverWait wait = new WebDriverWait(driver, 15);
 
-      wait.until(ExpectedConditions.visibilityOf(settingsScreen.getToolbar()));
       getMenu(driver);
       MenuScreen menuScreen = new MenuScreen(driver);
       wait.until(ExpectedConditions.visibilityOf(menuScreen.getAddEvent()));
@@ -54,16 +54,6 @@ public class LoginTests extends TestTemplate {
       touchAction.tap(popupScreen.getYesButton()).perform();
       wait.until(ExpectedConditions.visibilityOf(welcomeScreen.getLogo()));
       logger.info("Logout succesful");
-//      wait.until(ExpectedConditions.pre);
-//      Assert
    }
 
-   @Test
-   public void testMenu() throws InterruptedException {
-      Thread.sleep(3000l);
-
-
-      driver.swipe(10, 280, 300, 280, 1000);
-      Thread.sleep(3000l);
-   }
 }
