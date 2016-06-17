@@ -18,7 +18,7 @@ public class ScheduleTimeScreen extends ScreenTemplate {
         super(driver);
         clockCenter = new Point(findCenterX(), findCenterY());
         elements = driver.findElementsByAndroidUIAutomator("new UiSelector().descriptionMatches(\"([0-9])\")");
-        radius = (this.getThree().getLocation().getX() + this.getThree().getSize().getWidth() / 2) - clockCenter.getX();
+        radius = (this.getThree().getLocation().getX() + this.getThree().getSize().getWidth() / 2) - clockCenter.getX()-10;
 //      elements = driver.findElementsByClassName("android.widget.RadialTimePickerView.RadialPickerTouchHelper");
     }
 
@@ -95,24 +95,29 @@ public class ScheduleTimeScreen extends ScreenTemplate {
         return 1;
     }
 
-    private int getX(int angleGrad) {
-        double angleRad = Math.toRadians(angleGrad - 270);
-        return (int) (clockCenter.getX() + radius * Math.cos(angleRad));
+    private double getX(double angleGrad) {
+        double angleRad = Math.toRadians(angleGrad - 90);
+        return  (clockCenter.getX() + radius * Math.cos(angleRad));
     }
 
-    private int getY(int angleGrad) {
-        double angleRad = Math.toRadians(angleGrad - 270);
-        return (int) (clockCenter.getY() + radius * Math.sin(angleRad));
+    private double getY(double angleGrad) {
+        double angleRad = Math.toRadians(angleGrad - 90);
+        return (clockCenter.getY() + radius * Math.sin(angleRad));
     }
 
     public Point getMinutesPoint(int minutes) {
-        int angle = minutes * 6;
-        int x = getX(angle);
-        int y = getY(angle);
-        return new Point(x, y);
+        double angle = minutes * (6);
+        return new Point((int) getX(angle),(int) getY(angle));
+    }
+    public Point getHoursPoint(int hours){
+        int angle = hours * (30);
+        return new Point((int)getX(angle),(int) getY(angle));
     }
 
     public void printCoords(Point point) {
         System.out.println(point.getX() + " " + point.getY());
     }
+
+    //todo move_to with circle
+
 }

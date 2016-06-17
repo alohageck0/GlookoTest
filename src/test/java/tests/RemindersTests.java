@@ -6,6 +6,7 @@ import objectRepo.MenuScreen;
 import objectRepo.RemindersScreen;
 import objectRepo.ScheduleTimeScreen;
 import objectRepo.SetRemindersScreen;
+import org.openqa.selenium.Point;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import serviceClasses.TestTemplate;
@@ -49,13 +50,13 @@ public class RemindersTests extends TestTemplate {
     }
 
     @Test
-    public void test() {
+    public void test() throws InterruptedException {
         TouchAction touchAction = new TouchAction(driver);
         LoginTests loginTests = new LoginTests(driver);
         RemindersScreen remindersScreen = new RemindersScreen(driver);
         SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
         int minutes;
-
+        int hours;
 
 //      loginTests.login(username, password);
 //      logger.info("Logged in succesfully");
@@ -67,15 +68,31 @@ public class RemindersTests extends TestTemplate {
         ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
         minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
 
-        scheduleTimeScreen.printCenter();
-        System.out.println(scheduleTimeScreen.getThree().getLocation());
-        System.out.println(scheduleTimeScreen.getRadius());
-//        System.out.println(scheduleTimeScreen.getZero().getLocation());
+        touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
+        Point touchPoint = scheduleTimeScreen.getMinutesPoint(6);
+        touchAction.tap(touchPoint.getX(),touchPoint.getY()).perform();
+Thread.sleep(3000);
+         touchPoint = scheduleTimeScreen.getMinutesPoint(26);
+        touchAction.tap(touchPoint.getX(),touchPoint.getY()).perform();
+        Thread.sleep(3000);
 
-
-        scheduleTimeScreen.printCoords(scheduleTimeScreen.getMinutesPoint(45));
-        //todo create method to find x and y of each minute and hour
-
+         touchPoint = scheduleTimeScreen.getMinutesPoint(51);
+        touchAction.tap(touchPoint.getX(),touchPoint.getY()).perform();
+//        if (minutes == 59) {
+//            hours = Integer.parseInt(scheduleTimeScreen.getHoursSelector().getText());
+//
+//            touchAction.tap(scheduleTimeScreen.getHoursSelector()).perform();
+//            Point hoursTouch = scheduleTimeScreen.getHoursPoint(hours);
+//            touchAction.tap(hoursTouch.getX(), hoursTouch.getY()).perform();
+//
+//            touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
+//            Point minutesTouch = scheduleTimeScreen.getMinutesPoint(minutes + 1);
+//            touchAction.tap(minutesTouch.getX(), minutesTouch.getY()).perform();
+//        }else {
+//            touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
+//            Point minutesTouch = scheduleTimeScreen.getMinutesPoint(minutes + 1);
+//            touchAction.tap(minutesTouch.getX(), minutesTouch.getY()).perform();
+//        }
 
 //      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
     }
