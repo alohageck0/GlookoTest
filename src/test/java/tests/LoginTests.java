@@ -54,7 +54,7 @@ public class LoginTests extends TestTemplate {
       touchAction.tap(accountScreen.getLogoutButton()).perform();
       touchAction.tap(popupScreen.getYesButton()).perform();
       wait.until(ExpectedConditions.visibilityOf(welcomeScreen.getLogo()));
-      logger.info("Logout succesful");
+      logger.info("Logout successful");
    }
 
 }
