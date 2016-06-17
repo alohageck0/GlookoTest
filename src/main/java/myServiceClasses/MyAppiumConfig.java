@@ -1,4 +1,4 @@
-package serviceClasses;
+package myServiceClasses;
 
 import com.github.genium_framework.appium.support.server.AppiumServer;
 import com.github.genium_framework.server.ServerArguments;

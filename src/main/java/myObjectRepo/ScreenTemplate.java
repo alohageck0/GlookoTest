@@ -1,4 +1,4 @@
-package objectRepo;
+package myObjectRepo;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;

@@ -1,4 +1,4 @@
-package objectRepo;
+package myObjectRepo;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class MenuScreen extends ScreenTemplate {
-   List<WebElement> elements;
+   private List<WebElement> elements;
 
    public MenuScreen(AndroidDriver driver) {
       super(driver);

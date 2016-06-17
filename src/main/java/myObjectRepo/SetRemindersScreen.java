@@ -1,4 +1,4 @@
-package objectRepo;
+package myObjectRepo;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -40,7 +40,7 @@ public class SetRemindersScreen extends ScreenTemplate {
    @FindBy(id = "com.glooko.logbook:id/lblReminderTypeHeader")
    WebElement remindersHeader;
 
-   public WebElement getScreen() {
+   private WebElement getScreen() {
       return screen.get(0);
    }
 

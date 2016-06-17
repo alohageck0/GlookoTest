@@ -1,4 +1,4 @@
-package objectRepo;
+package myObjectRepo;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -42,12 +42,6 @@ public class ScheduleTimeScreen extends ScreenTemplate {
 //        elements = getDriver().findElementsByAndroidUIAutomator("new UiSelector().descriptionMatches(\"([0-9])*\")");
 //        System.out.println(elements.size());
       return elements.get(2);
-   }
-
-   public void printElems() {
-      for (WebElement element : elements) {
-//            System.out.println(element.getAttribute("contentDescription"));
-      }
    }
 
    public int getRadius() {
@@ -118,7 +112,6 @@ public class ScheduleTimeScreen extends ScreenTemplate {
       System.out.println(point.getX() + " " + point.getY());
    }
 
-   //todo move_to with circle
    private ArrayList<Point> getPointsCurve(int minutes) {
       ArrayList<Point> pointsCurve = new ArrayList<>();
 

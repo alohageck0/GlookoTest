@@ -1,4 +1,4 @@
-package serviceClasses;
+package myServiceClasses;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
