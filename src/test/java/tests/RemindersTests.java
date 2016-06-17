@@ -19,7 +19,7 @@ public class RemindersTests extends TestTemplate {
    public RemindersTests() {
    }
 
-   //   @Test(dataProvider = "insulins", dataProviderClass = MyDataProviders.class)
+   //      @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class)
    @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class, dependsOnGroups = {"login"}, groups = {"insulin"})
    public void addInsulinReminderTest(String username, String password, String insulin, String quantity) {
       /**
