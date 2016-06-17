@@ -25,7 +25,7 @@ public class RemindersTests extends TestTemplate {
       /**
        * Method adds insulin reminder and verifies reminder's appearance and history.
        * Reminder scheduled in +2 minutes from device time using data-driven
-       * insulins and quantities from excel spreadsheet.
+       * insulin and quantities from excel spreadsheet.
        */
       LoginTests loginTests = new LoginTests(driver);
       loginTests.login(username, password);
