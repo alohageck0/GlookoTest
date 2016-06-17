@@ -39,7 +39,7 @@ public class RemindersTests extends TestTemplate {
       String expectedTime;
       wait.until(ExpectedConditions.visibilityOf(homeScreen.getGetStartedTitle()));
 
-      getMenu(driver);
+      ScreenTemplate.getMenu(driver);
       MenuScreen menuScreen = new MenuScreen(driver);
       touchAction.tap(menuScreen.getReminders()).perform();
       RemindersScreen remindersScreen = new RemindersScreen(driver);
@@ -92,7 +92,7 @@ public class RemindersTests extends TestTemplate {
       logger.info("Reminder appeared. Verifying history");
       touchAction.tap(reminderPopup.getTookItButton()).perform();
       logger.info("Pop up acknowledged");
-      getMenu(driver);
+      ScreenTemplate.getMenu(driver);
       touchAction.tap(menuScreen.getHistory()).perform();
 
       HistoryScreen historyScreen = new HistoryScreen(driver);

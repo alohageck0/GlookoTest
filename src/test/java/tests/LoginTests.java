@@ -46,7 +46,7 @@ public class LoginTests extends TestTemplate {
       WelcomeScreen welcomeScreen = new WelcomeScreen(driver);
       WebDriverWait wait = new WebDriverWait(driver, 30);
 
-      getMenu(driver);
+      ScreenTemplate.getMenu(driver);
       MenuScreen menuScreen = new MenuScreen(driver);
       wait.until(ExpectedConditions.visibilityOf(menuScreen.getAddEvent()));
       touchAction.tap(menuScreen.getSettings()).perform();

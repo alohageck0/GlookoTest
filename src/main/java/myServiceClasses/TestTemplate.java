@@ -41,9 +41,4 @@ public abstract class TestTemplate {
       config.cleanUp();
    }
 
-   public static void getMenu(AndroidDriver driver) {
-      WebDriverWait wait = new WebDriverWait(driver, 40);
-      wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("com.glooko.logbook:id/toolbar"))));
-      driver.swipe(10, 280, 350, 280, 400);
-   }
 }
