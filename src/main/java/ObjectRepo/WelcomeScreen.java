@@ -30,7 +30,4 @@ public class WelcomeScreen extends ScreenTemplate {
       return loginButton;
    }
 
-//   public boolean ifLogoPresent(){
-//
-//   }
 }

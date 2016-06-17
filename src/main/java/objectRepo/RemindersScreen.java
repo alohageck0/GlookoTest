@@ -12,6 +12,13 @@ public class RemindersScreen extends ScreenTemplate {
    @FindBy(id = "com.glooko.logbook:id/mniAddReminder")
    WebElement addReminderButton;
 
+   @FindBy(id = "com.glooko.logbook:id/lblTime")
+   WebElement reminderTime;
+
+   public WebElement getReminderTime() {
+      return reminderTime;
+   }
+
    public WebElement getAddReminderButton() {
       return addReminderButton;
    }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GlookoTest.iml" filepath="$PROJECT_DIR$/.idea/GlookoTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/glookotest1.iml" filepath="$PROJECT_DIR$/glookotest1.iml" />
     </modules>
   </component>
 </project>

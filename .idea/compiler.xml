@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="glookotest" />
         <module name="GlookoTest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="glookotest" target="1.8" />
       <module name="GlookoTest" target="1.8" />
     </bytecodeTargetLevel>
   </component>

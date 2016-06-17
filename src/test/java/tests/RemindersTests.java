@@ -2,98 +2,126 @@ package tests;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import objectRepo.MenuScreen;
-import objectRepo.RemindersScreen;
-import objectRepo.ScheduleTimeScreen;
-import objectRepo.SetRemindersScreen;
+import io.appium.java_client.android.AndroidKeyCode;
+import objectRepo.*;
 import org.openqa.selenium.Point;
-import org.testng.annotations.AfterClass;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import serviceClasses.TestTemplate;
 
 public class RemindersTests extends TestTemplate {
-    public RemindersTests(AndroidDriver driver) {
-        super(driver);
-    }
+   public RemindersTests(AndroidDriver driver) {
+      super(driver);
+   }
 
-    public RemindersTests() {
-    }
+   public RemindersTests() {
+   }
 
-    //   @AfterClass
-    public void tearDown() {
-        logger.info("Started logout");
-        LoginTests loginTests = new LoginTests(driver);
-        loginTests.logout();
-    }
+   //   @AfterClass
+   public void tearDown() {
+      logger.info("Started logout");
+      LoginTests loginTests = new LoginTests(driver);
+      loginTests.logout();
+   }
 
-    @Test(dataProvider = "loginUsers", dataProviderClass = MyDataProviders.class)
-    public void addInsulinReminderTest(String username, String password) {
-        TouchAction touchAction = new TouchAction(driver);
-        LoginTests loginTests = new LoginTests(driver);
-        RemindersScreen remindersScreen = new RemindersScreen(driver);
-        SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
-        ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
-        int minutes;
+//      @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class, dependsOnGroups = {"login", "insulin"})
+   public void addInsulinReminderTest(String username, String password, String insulin, String quantity) {
+      LoginTests loginTests = new LoginTests(driver);
+      loginTests.login(username, password);
+      logger.info("Logged in succesfully");
+//      addInsulinReminder(insulin, quantity);
+   }
+
+//   @Test(dataProvider = "insulins", dataProviderClass = MyDataProviders.class)
+   @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class, dependsOnGroups = {"login"}, groups = {"insulin"})
+   public void addInsulinReminder(String username, String password, String insulin, String quantity) {
+      /**
+       * Method adds insulin reminder and verifies reminder's appearance and history.
+       * Reminder scheduled in +2 minutes from device time using data-driven
+       * insulins and quantities from excel spreadsheet.
+       */
+      LoginTests loginTests = new LoginTests(driver);
+      loginTests.login(username, password);
+      logger.info("Logged in succesfully");
+
+      TouchAction touchAction = new TouchAction(driver);
+      WebDriverWait wait = new WebDriverWait(driver, 30);
+      HomeScreen homeScreen = new HomeScreen(driver);
+      int minutes;
+      int hours;
+      String expectedTime;
+      wait.until(ExpectedConditions.visibilityOf(homeScreen.getGetStartedTitle()));
+
+      getMenu(driver);
+      MenuScreen menuScreen = new MenuScreen(driver);
+      touchAction.tap(menuScreen.getReminders()).perform();
+      RemindersScreen remindersScreen = new RemindersScreen(driver);
+      touchAction.tap(remindersScreen.getAddReminderButton()).perform();
+      logger.info("add reminder button tapped");
+      SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
+
+      touchAction.tap(setRemindersScreen.getDayOfWeekSelector()).perform();
+      SelectDaysOfWeekScreen daysOfWeekScreen = new SelectDaysOfWeekScreen(driver);
+      touchAction.tap(daysOfWeekScreen.getOkButton()).perform();
+      logger.info("select days successful");
+
+      touchAction.tap(setRemindersScreen.getInsulinReminderCheckbox()).perform();
+      touchAction.tap(setRemindersScreen.getInsulinSelector()).perform();
+      InsulinScreen insulinScreen = new InsulinScreen(driver);
+      touchAction.tap(insulinScreen.selectInsulin(insulin)).perform();
+      touchAction.tap(setRemindersScreen.getUnits()).perform();
+      setRemindersScreen.setUnits(quantity);
+
+      driver.pressKeyCode(AndroidKeyCode.ENTER);
+
+      setRemindersScreen.scrollToSchedule();
+      touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
+      ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
+      minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
+
+      touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
+
+      if (minutes < 58) {
+         scheduleTimeScreen.setMinutes(minutes);
+      } else {
+         hours = Integer.parseInt(scheduleTimeScreen.getHoursSelector().getText());
+         touchAction.tap(scheduleTimeScreen.getHoursSelector()).perform();
+         Point hoursTouch = scheduleTimeScreen.getHoursPoint(hours + 1);
+         touchAction.tap(hoursTouch.getX(), hoursTouch.getY()).perform();
+         touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
+         Point minutesTouch = scheduleTimeScreen.getMinutesPoint(0);
+         touchAction.tap(minutesTouch.getX(), minutesTouch.getY()).perform();
+      }
+      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
+      expectedTime = setRemindersScreen.getTimeSelector().getText();
+      touchAction.tap(setRemindersScreen.getSaveButton()).perform();
 
 
-        loginTests.login(username, password);
-        logger.info("Logged in succesfully");
-        getMenu(driver);
-        MenuScreen menuScreen = new MenuScreen(driver);
-        touchAction.tap(menuScreen.getReminders()).perform();
-        touchAction.tap(remindersScreen.getAddReminderButton()).perform();
-        touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
-        minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
-        touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
-        scheduleTimeScreen.getMinutesSelector().sendKeys(Integer.toString(minutes + 1));
-        touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
-    }
+      ReminderPopupScreen reminderPopup = new ReminderPopupScreen(driver);
+      wait = new WebDriverWait(driver, 181);
+      wait.until(ExpectedConditions.visibilityOf(reminderPopup.getTookItButton()));
 
-    @Test
-    public void test() throws InterruptedException {
-        TouchAction touchAction = new TouchAction(driver);
-        LoginTests loginTests = new LoginTests(driver);
-        RemindersScreen remindersScreen = new RemindersScreen(driver);
-        SetRemindersScreen setRemindersScreen = new SetRemindersScreen(driver);
-        int minutes;
-        int hours;
+      logger.info("Reminder appeared. Verifying history");
+      touchAction.tap(reminderPopup.getTookItButton()).perform();
 
-//      loginTests.login(username, password);
-//      logger.info("Logged in succesfully");
-        getMenu(driver);
-        MenuScreen menuScreen = new MenuScreen(driver);
-        touchAction.tap(menuScreen.getReminders()).perform();
-        touchAction.tap(remindersScreen.getAddReminderButton()).perform();
-        touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
-        ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
-        minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
+      getMenu(driver);
+      touchAction.tap(menuScreen.getHistory()).perform();
 
-        touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
-        Point touchPoint = scheduleTimeScreen.getMinutesPoint(6);
-        touchAction.tap(touchPoint.getX(),touchPoint.getY()).perform();
-Thread.sleep(3000);
-         touchPoint = scheduleTimeScreen.getMinutesPoint(26);
-        touchAction.tap(touchPoint.getX(),touchPoint.getY()).perform();
-        Thread.sleep(3000);
+      HistoryScreen historyScreen = new HistoryScreen(driver);
+      String actualMedication = historyScreen.getLastReminderMedication().getText();
+      String actualUnits = historyScreen.getLastReminderUnits().getText();
+      String actualTime = historyScreen.getLastReminderTime().getText();
 
-         touchPoint = scheduleTimeScreen.getMinutesPoint(51);
-        touchAction.tap(touchPoint.getX(),touchPoint.getY()).perform();
-//        if (minutes == 59) {
-//            hours = Integer.parseInt(scheduleTimeScreen.getHoursSelector().getText());
-//
-//            touchAction.tap(scheduleTimeScreen.getHoursSelector()).perform();
-//            Point hoursTouch = scheduleTimeScreen.getHoursPoint(hours);
-//            touchAction.tap(hoursTouch.getX(), hoursTouch.getY()).perform();
-//
-//            touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
-//            Point minutesTouch = scheduleTimeScreen.getMinutesPoint(minutes + 1);
-//            touchAction.tap(minutesTouch.getX(), minutesTouch.getY()).perform();
-//        }else {
-//            touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
-//            Point minutesTouch = scheduleTimeScreen.getMinutesPoint(minutes + 1);
-//            touchAction.tap(minutesTouch.getX(), minutesTouch.getY()).perform();
-//        }
+      //Assertion
+      Assert.assertEquals(actualMedication, insulin);
+      logger.info("Insulin type asserted");
+      Assert.assertEquals(actualUnits, quantity + ".00 units");
+      logger.info("Units asserted");
+      Assert.assertEquals(actualTime, expectedTime);
+      logger.info("Time asserted");
+   }
 
-//      touchAction.tap(scheduleTimeScreen.getOkButton()).perform();
-    }
+
 }

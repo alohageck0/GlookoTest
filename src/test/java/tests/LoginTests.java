@@ -23,14 +23,15 @@ public class LoginTests extends TestTemplate {
       WelcomeScreen welcomeScreen = new WelcomeScreen(driver);
       LoginScreen loginScreen = new LoginScreen(driver);
       HomeScreen homeScreen = new HomeScreen(driver);
+      WebDriverWait wait = new WebDriverWait(driver, 40);
 
+      wait.until(ExpectedConditions.visibilityOf(welcomeScreen.getLoginButton()));
       touchAction.tap(welcomeScreen.getLoginButton()).perform();
       touchAction.tap(loginScreen.getUsername_field_login()).perform();
       loginScreen.getUsername_field_login().sendKeys(username);
       touchAction.tap(loginScreen.getPassword_field_login()).perform();
       loginScreen.getPassword_field_login().sendKeys(password);
       touchAction.tap(loginScreen.getLog_in_button()).perform();
-      WebDriverWait wait = new WebDriverWait(driver, 20);
       wait.until(ExpectedConditions.visibilityOf(homeScreen.getGetStartedTitle()));
       Assert.assertEquals(homeScreen.getGetStartedTitle().getText(), "Get Started!");
       logger.info("Home screen asserted");
@@ -43,7 +44,7 @@ public class LoginTests extends TestTemplate {
       AccountScreen accountScreen = new AccountScreen(driver);
       PopupScreen popupScreen = new PopupScreen(driver);
       WelcomeScreen welcomeScreen = new WelcomeScreen(driver);
-      WebDriverWait wait = new WebDriverWait(driver, 15);
+      WebDriverWait wait = new WebDriverWait(driver, 30);
 
       getMenu(driver);
       MenuScreen menuScreen = new MenuScreen(driver);

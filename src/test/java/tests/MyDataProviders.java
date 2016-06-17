@@ -24,6 +24,14 @@ public class MyDataProviders {
    public static Object[][] loginUsers() throws IOException {
       return getData("usernames");
    }
+   @DataProvider
+   public static Object[][] insulins() throws IOException {
+      return getData("insulins");
+   }
+   @DataProvider
+   public static Object[][] reminderTest() throws IOException {
+      return getData("reminderTest");
+   }
 
    private static Object[][] getData(String sheetName) throws IOException {
       FileInputStream file = new FileInputStream(testData.getAbsolutePath());

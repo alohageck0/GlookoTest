@@ -17,4 +17,11 @@ public class InsulinScreen extends ScreenTemplate {
    public WebElement getHumalog() {
       return elements.get(1);
    }
+
+   public WebElement selectInsulin(String insulin) {
+      if (insulin.equals("Humalog")) {
+         return getHumalog();
+      }
+      return null;
+   }
 }

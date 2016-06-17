@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Glooko challenge">
+    <test name="insulin">
+        <groups>
+            <run>
+                <include name="insulin"/>
+                <include name="login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.LoginTests"/>
+            <class name="tests.RemindersTests"/>
+        </classes>
+    </test>
+</suite>

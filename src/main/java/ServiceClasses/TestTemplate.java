@@ -1,14 +1,13 @@
 package serviceClasses;
 
 import io.appium.java_client.android.AndroidDriver;
-import objectRepo.ScreenTemplate;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -27,7 +26,7 @@ public abstract class TestTemplate {
    public TestTemplate() {
    }
 
-   @BeforeSuite(alwaysRun = true)
+   @BeforeClass(alwaysRun = true)
    public void setUp() throws MalformedURLException {
       config.setServerArguments();
       config.startAppiumServer();
@@ -35,7 +34,7 @@ public abstract class TestTemplate {
       this.driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), config.getCapabilities());
    }
 
-   @AfterSuite(alwaysRun = true)
+   @AfterClass(alwaysRun = true)
    public void tearDown() {
 
       driver.quit();
@@ -43,7 +42,7 @@ public abstract class TestTemplate {
    }
 
    public static void getMenu(AndroidDriver driver) {
-      WebDriverWait wait = new WebDriverWait(driver, 15);
+      WebDriverWait wait = new WebDriverWait(driver, 40);
       wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("com.glooko.logbook:id/toolbar"))));
       driver.swipe(10, 280, 350, 280, 400);
    }

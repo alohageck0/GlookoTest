@@ -34,7 +34,7 @@ public class Temp extends SetRemTest {
       minutes = Integer.parseInt(scheduleTimeScreen.getMinutesSelector().getText());
       touchAction.tap(scheduleTimeScreen.getMinutesSelector()).perform();
 
-      touchAction.tap(scheduleTimeScreen.setMinutes(22));
+//      touchAction.tap(scheduleTimeScreen.setMinutes(22));
 
       scheduleTimeScreen.getMinutesSelector().sendKeys(Integer.toString(33));
 

@@ -21,6 +21,10 @@ public class MenuScreen extends ScreenTemplate {
    @FindBy(id = "com.glooko.logbook:id/navigation_list")
    WebElement navigationList;
 
+   public WebElement getHistory() {
+      return elements.get(1);
+   }
+
    public WebElement getReminders() {
       return elements.get(5);
    }
