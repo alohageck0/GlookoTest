@@ -19,24 +19,9 @@ public class RemindersTests extends TestTemplate {
    public RemindersTests() {
    }
 
-   //   @AfterClass
-   public void tearDown() {
-      logger.info("Started logout");
-      LoginTests loginTests = new LoginTests(driver);
-      loginTests.logout();
-   }
-
-//      @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class, dependsOnGroups = {"login", "insulin"})
-   public void addInsulinReminderTest(String username, String password, String insulin, String quantity) {
-      LoginTests loginTests = new LoginTests(driver);
-      loginTests.login(username, password);
-      logger.info("Logged in succesfully");
-//      addInsulinReminder(insulin, quantity);
-   }
-
-//   @Test(dataProvider = "insulins", dataProviderClass = MyDataProviders.class)
+   //   @Test(dataProvider = "insulins", dataProviderClass = MyDataProviders.class)
    @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class, dependsOnGroups = {"login"}, groups = {"insulin"})
-   public void addInsulinReminder(String username, String password, String insulin, String quantity) {
+   public void addInsulinReminderTest(String username, String password, String insulin, String quantity) {
       /**
        * Method adds insulin reminder and verifies reminder's appearance and history.
        * Reminder scheduled in +2 minutes from device time using data-driven
@@ -44,7 +29,7 @@ public class RemindersTests extends TestTemplate {
        */
       LoginTests loginTests = new LoginTests(driver);
       loginTests.login(username, password);
-      logger.info("Logged in succesfully");
+      logger.info("Logged in successfully");
 
       TouchAction touchAction = new TouchAction(driver);
       WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -76,6 +61,7 @@ public class RemindersTests extends TestTemplate {
 
       driver.pressKeyCode(AndroidKeyCode.ENTER);
 
+      //Schedule time
       setRemindersScreen.scrollToSchedule();
       touchAction.tap(setRemindersScreen.getTimeSelector()).perform();
       ScheduleTimeScreen scheduleTimeScreen = new ScheduleTimeScreen(driver);
@@ -98,14 +84,14 @@ public class RemindersTests extends TestTemplate {
       expectedTime = setRemindersScreen.getTimeSelector().getText();
       touchAction.tap(setRemindersScreen.getSaveButton()).perform();
 
-
+      //Waiting for reminder
       ReminderPopupScreen reminderPopup = new ReminderPopupScreen(driver);
       wait = new WebDriverWait(driver, 181);
       wait.until(ExpectedConditions.visibilityOf(reminderPopup.getTookItButton()));
 
       logger.info("Reminder appeared. Verifying history");
       touchAction.tap(reminderPopup.getTookItButton()).perform();
-
+      logger.info("Pop up acknowledged");
       getMenu(driver);
       touchAction.tap(menuScreen.getHistory()).perform();
 
@@ -122,6 +108,4 @@ public class RemindersTests extends TestTemplate {
       Assert.assertEquals(actualTime, expectedTime);
       logger.info("Time asserted");
    }
-
-
 }
