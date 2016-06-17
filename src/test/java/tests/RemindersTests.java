@@ -106,6 +106,6 @@ public class RemindersTests extends TestTemplate {
       Assert.assertEquals(actualUnits, quantity + ".00 units");
       logger.info("Units asserted");
       Assert.assertEquals(actualTime, expectedTime);
-      logger.info("Time asserted");
+      logger.info("Reminder Time asserted");
    }
 }
