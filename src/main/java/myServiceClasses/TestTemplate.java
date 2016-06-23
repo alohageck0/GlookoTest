@@ -1,22 +1,18 @@
 package myServiceClasses;
 
+import com.appium.manager.AppiumParallelTest;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-public abstract class TestTemplate {
+public abstract class TestTemplate extends AppiumParallelTest {
    private File appDir = new File("src");
    private MyAppiumConfig config = new MyAppiumConfig();
-   protected AndroidDriver driver;
+//   protected AndroidDriver driver;
    protected Logger logger = Logger.getLogger(this.getClass().getName());
 
    public TestTemplate(AndroidDriver driver) {
@@ -27,11 +23,11 @@ public abstract class TestTemplate {
    }
 
    @BeforeClass(alwaysRun = true)
-   public void setUp() throws MalformedURLException {
-      config.setServerArguments();
-      config.startAppiumServer();
+   public void setUp() throws Exception {
+//      config.setServerArguments();
+//      config.startAppiumServer();
       PropertyConfigurator.configure(new File(appDir, "log4j.properties").getAbsolutePath());
-      this.driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), config.getCapabilities());
+      this.driver = startAppiumServerInParallel(getClass().getSimpleName());
    }
 
    @AfterClass(alwaysRun = true)

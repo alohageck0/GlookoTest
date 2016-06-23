@@ -35,6 +35,7 @@ public final class MyAppiumConfig {
       capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Panel");
       capabilities.setCapability("appPackage", "com.glooko.logbook");
       capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 15);
+      capabilities.setCapability(MobileCapabilityType.TAKES_SCREENSHOT, "true");
    }
 
    public void startAppiumServer() {
