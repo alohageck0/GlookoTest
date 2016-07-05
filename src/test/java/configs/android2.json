@@ -2,10 +2,12 @@
   "capabilities": [
     {
       "browserName": "Android",
-      "version": "5.0",
-      "maxInstances": 3,
+      "version": "5.1",
+      "maxInstances": 1,
       "platform": "ANDROID",
-      "deviceName": "TA09308W89"
+      "applicationName": "TA09308W89",
+      "newCommandTimeout":"30",
+      "deviceReadyTimeout":5
     }
   ],
   "configuration": {

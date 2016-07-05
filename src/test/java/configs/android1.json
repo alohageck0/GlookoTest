@@ -3,9 +3,11 @@
     {
       "browserName": "Android",
       "version": "5.0",
-      "maxInstances": 3,
+      "maxInstances": 1,
       "platform": "ANDROID",
-      "deviceName": "TA09308ME6"
+      "applicationName": "TA09308ME6",
+      "newCommandTimeout":"30",
+      "deviceReadyTimeout":5
     }
   ],
   "configuration": {
