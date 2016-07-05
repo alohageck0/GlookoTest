@@ -1,7 +1,7 @@
 {
   "capabilities": [
     {
-      "browserName": "Android",
+      "browserName": "TA09308ME6",
       "version": "5.0",
       "maxInstances": 1,
       "platform": "ANDROID",

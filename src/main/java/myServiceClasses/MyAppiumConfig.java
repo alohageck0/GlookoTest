@@ -32,7 +32,7 @@ public final class MyAppiumConfig {
       serverArguments.setArgument("--local-timezone", true);
       serverArguments.setArgument("--device-ready-timeout", "100");
       capabilities.setCapability(MobileCapabilityType.PLATFORM, Platform.ANDROID);
-      capabilities.setCapability("applicationName", "TA09308W89");
+//      capabilities.setCapability("applicationName", "TA09308W89");
       capabilities.setCapability("deviceName", "lg");
       capabilities.setCapability("platformVersion", "5.1");
       capabilities.setCapability("appPackage", "com.glooko.logbook");
