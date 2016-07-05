@@ -3,9 +3,6 @@ package myServiceClasses;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -31,14 +28,14 @@ public abstract class TestTemplate {
       config.setServerArguments();
       config.startAppiumServer();
       PropertyConfigurator.configure(new File(appDir, "log4j.properties").getAbsolutePath());
-      this.driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), config.getCapabilities());
+      this.driver = new AndroidDriver(new URL("http://127.0.0.1:4444/wd/hub"), config.getCapabilities());
    }
 
    @AfterClass(alwaysRun = true)
    public void tearDown() {
 
       driver.quit();
-      config.cleanUp();
+//      config.cleanUp();
    }
 
 }
