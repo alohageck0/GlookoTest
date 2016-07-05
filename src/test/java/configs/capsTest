@@ -1,6 +1,5 @@
-appium --nodeconfig /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/android1.json --default-capabilities /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/defaultCaps1.json
-appium -p 4274 -cp 4274 --nodeconfig /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/android2.json --default-capabilities /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/defaultCaps2.json
+
+appium --nodeconfig /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/android1.json -U TA09308ME6
+appium --nodeconfig /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/android2.json --port 4724 -cp 4724 -U TA09308W89
 
 java -jar selenium-server-standalone-2.53.0.jar -role hub -nodetimeout 600
-java -jar selenium-server-standalone-2.53.0.jar -role hub -nodetimeout 600 -hubConfig /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/hub.json
-java -cp *:. org.openqa.grid.selenium.GridLauncher -role hub -hubConfig /Users/royalfiish/IdeaProjects/GlookoTest/src/test/java/configs/hub.json
