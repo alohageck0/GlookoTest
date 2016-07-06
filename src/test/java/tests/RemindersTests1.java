@@ -107,5 +107,7 @@ public class RemindersTests1 extends TestTemplate {
       logger.info("Units asserted");
       Assert.assertEquals(actualTime, expectedTime);
       logger.info("Reminder Time asserted");
+      loginTests.logout();
+
    }
 }

@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class RemindersTests2 extends TestTemplate {
-   public RemindersTests2(AndroidDriver driver) {
+public class RemindersTests3 extends TestTemplate {
+   public RemindersTests3(AndroidDriver driver) {
       super(driver);
    }
 
-   public RemindersTests2() {
+   public RemindersTests3() {
    }
 
    //      @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class)

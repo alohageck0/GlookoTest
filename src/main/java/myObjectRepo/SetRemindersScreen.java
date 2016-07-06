@@ -76,10 +76,18 @@ public class SetRemindersScreen extends ScreenTemplate {
       return units;
    }
 
+//   public void scrollToSchedule() {
+//      int startX = getScreen().getSize().getWidth() / 2;
+//      int startY = getScreen().getSize().getHeight() + (int) ((getScreen().getSize().getHeight()) * 0.8);
+//      int endY = getScreen().getSize().getHeight() + (int) ((getScreen().getSize().getHeight()) * 0.1);
+//      TouchAction touchAction = new TouchAction(getDriver());
+//      touchAction.longPress(startX, startY).moveTo(startX, endY).release().perform();
+//   }
+
    public void scrollToSchedule() {
       int startX = getScreen().getSize().getWidth() / 2;
-      int startY = getScreen().getSize().getHeight() + (int) ((getScreen().getSize().getHeight()) * 0.8);
-      int endY = getScreen().getSize().getHeight() + (int) ((getScreen().getSize().getHeight()) * 0.1);
+      int startY = (int) ((getScreen().getSize().getHeight()) * 0.8);
+      int endY = (int) ((getScreen().getSize().getHeight()) * 0.1);
       TouchAction touchAction = new TouchAction(getDriver());
       touchAction.longPress(startX, startY).moveTo(startX, endY).release().perform();
    }

@@ -14,6 +14,7 @@
             <class name="tests.RemindersTests"/>
             <class name="tests.RemindersTests1"/>
             <class name="tests.RemindersTests2"/>
+            <class name="tests.RemindersTests3"/>
         </classes>
     </test>
 </suite>
