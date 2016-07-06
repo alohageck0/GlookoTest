@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Glooko challenge" thread-count="2">
+<suite name="Glooko challenge" parallel="classes" thread-count="2">
     <test name="insulin">
         <groups>
             <run>
@@ -12,6 +12,8 @@
         <classes>
             <class name="tests.LoginTests"/>
             <class name="tests.RemindersTests"/>
+            <class name="tests.RemindersTests1"/>
+            <class name="tests.RemindersTests2"/>
         </classes>
     </test>
 </suite>
