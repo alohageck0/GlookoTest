@@ -9,6 +9,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class RemindersTests3 extends TestTemplate {
@@ -18,7 +19,11 @@ public class RemindersTests3 extends TestTemplate {
 
    public RemindersTests3() {
    }
-
+   @AfterMethod
+   public void tearDown() {
+      LoginTests loginTests = new LoginTests(driver);
+      loginTests.logout();
+   }
    //      @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class)
    @Test(dataProvider = "reminderTest", dataProviderClass = MyDataProviders.class, dependsOnGroups = {"login"}, groups = {"insulin"})
    public void addInsulinReminderTest(String username, String password, String insulin, String quantity) {
@@ -107,7 +112,7 @@ public class RemindersTests3 extends TestTemplate {
       logger.info("Units asserted");
       Assert.assertEquals(actualTime, expectedTime);
       logger.info("Reminder Time asserted");
-      loginTests.logout();
+//      loginTests.logout();
 
    }
 }
