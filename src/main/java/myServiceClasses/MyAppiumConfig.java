@@ -1,6 +1,5 @@
 package myServiceClasses;
 
-import com.github.genium_framework.appium.support.server.AppiumServer;
 import com.github.genium_framework.server.ServerArguments;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Platform;
@@ -11,15 +10,15 @@ import java.net.MalformedURLException;
 
 public final class MyAppiumConfig {
    private File appDir = new File("src");
-   private File app = new File(appDir, "BookMyShow.apk");
+   private File app = new File(appDir, "application.apk");
    private ServerArguments serverArguments = new ServerArguments();
-   private AppiumServer appiumServer;
+   private AppiumServerJava appiumServer;
    private DesiredCapabilities capabilities = new DesiredCapabilities();
 
 
    public void setServerArguments() throws MalformedURLException {
       setBasicServerArguments();
-      capabilities.setCapability("appActivity", "com.glooko.logbook.activity.FtueActivity");
+//      capabilities.setCapability("appActivity", "com.glooko.logbook.activity.FtueActivity");
    }
 
    public void setServerArguments(String activity) {
@@ -33,17 +32,19 @@ public final class MyAppiumConfig {
       serverArguments.setArgument("--device-ready-timeout", "100");
       capabilities.setCapability(MobileCapabilityType.PLATFORM, Platform.ANDROID);
       capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Panel");
-      capabilities.setCapability("appPackage", "com.glooko.logbook");
+      capabilities.setCapability("app", app.getAbsolutePath());
       capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 15);
    }
 
    public void startAppiumServer() {
-      appiumServer = new AppiumServer(serverArguments);
+      appiumServer = new AppiumServerJava();
       appiumServer.startServer();
    }
 
    public void cleanUp() {
+      System.out.println("In cleanup");
       if (appiumServer.isServerRunning()) {
+         System.out.println("Attempt to stop server");
          appiumServer.stopServer();
       }
    }

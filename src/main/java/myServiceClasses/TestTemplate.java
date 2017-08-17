@@ -3,9 +3,6 @@ package myServiceClasses;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -36,7 +33,7 @@ public abstract class TestTemplate {
 
    @AfterClass(alwaysRun = true)
    public void tearDown() {
-
+      System.out.println("tear down started");
       driver.quit();
       config.cleanUp();
    }
